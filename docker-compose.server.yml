@@ -1,0 +1,10 @@
+# Local server overlay. The upstream compose file is a development/test setup;
+# this overlay binds the dashboard to localhost and adds a stable project name.
+services:
+  dashboard:
+    # !override replaces the upstream 0.0.0.0:8501 publication.
+    ports: !override
+      - "127.0.0.1:18501:8501"
+    restart: unless-stopped
+    mem_limit: 2g
+    cpus: 2
