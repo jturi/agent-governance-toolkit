@@ -18,7 +18,10 @@ http://127.0.0.1:18501
 ```
 
 It is intentionally not published on `0.0.0.0`. Put it behind an authenticated
-reverse proxy or Tailscale access control before exposing it remotely.
+reverse proxy or Tailscale access control before exposing it remotely. The
+server overlay runs as the upstream non-root `dev` user, drops Linux
+capabilities, uses a read-only root filesystem, and limits memory, CPU, and
+process count.
 
 ## Operations
 

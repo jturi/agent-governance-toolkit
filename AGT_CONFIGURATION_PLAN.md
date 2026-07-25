@@ -204,3 +204,27 @@ separate smoke test and rollout review.
 - [Security hardening tutorial](docs/tutorials/25-security-hardening.md)
 - [OpenCode integration](agent-governance-opencode/README.md)
 - [Record retention policy](docs/compliance/record-retention-policy.md)
+
+## Implementation result (2026-07-25)
+
+- Central policy source: `/home/server/data/repos/agent-context/policies`.
+- Active profiles: `opencode.advisory.json` and `claude.advisory.json`, reached
+  through runtime symlinks; enforce profiles remain preserved for promotion.
+- Native candidate: `agt-baseline-enforce-candidate.yaml`; `agt lint-policy`
+  passes.
+- Audit location: `/home/server/data/repos/agent-context/audit`, mode `0700`,
+  Git-ignored, with payload minimization retained.
+- Dashboard: healthy at `http://127.0.0.1:18501`, with loopback binding,
+  `restart: unless-stopped`, read-only rootfs, dropped capabilities,
+  `no-new-privileges`, tmpfs write areas, PID/CPU/memory limits, and a health
+  check.
+- OpenCode and Claude package tests completed successfully (the installed
+  packages currently contain no test cases, so the runner reported zero
+  tests).
+- Codex, Gemini CLI, and Hermes have central guidance paths but no equivalent
+  first-party AGT pre-tool enforcement hook in the installed toolkit release.
+  Do not promote enforcement for those surfaces based on this setup alone.
+- The user-systemd unit is installed, but this execution environment cannot
+  connect to the user systemd bus; Docker restart policy is the effective
+  automatic-restart mechanism until the unit is enabled in a normal login
+  session.
