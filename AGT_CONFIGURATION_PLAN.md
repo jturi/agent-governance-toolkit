@@ -1,6 +1,6 @@
 # AGT configuration plan
 
-Status: questionnaire awaiting answers  
+Status: decisions recorded; implementation plan ready  
 Date: 2026-07-25  
 Current deployment: official AGT repository checkout with the Streamlit
 dashboard running in Docker at `http://127.0.0.1:18501`.
@@ -21,6 +21,34 @@ Reply with one choice per number, for example:
 
 You may add a short note after any answer. If you do not know, select the
 recommended option and I will produce a conservative first configuration.
+
+## Recorded decisions
+
+The user selected the recommended **A** option for all 20 questions:
+
+```text
+1A, 2A, 3A, 4A, 5A, 6A, 7A, 8A, 9A, 10A,
+11A, 12A, 13A, 14A, 15A, 16A, 17A, 18A, 19A, 20A
+```
+
+### Resulting baseline
+
+- Govern Codex, OpenCode, Claude Code, Gemini CLI, and Hermes.
+- Use the container for dashboard plus policy/audit support.
+- Begin in evaluate-only mode, then promote to enforcement.
+- Use the native AGT YAML/ACS policy engine.
+- Cover all available model, prompt, tool, delegation, and output
+  intervention points.
+- Default to least privilege: unmatched side-effecting actions deny; risky
+  actions require approval or denial.
+- Use stable per-agent identities, runtime secret injection, local append-only
+  audit storage, payload-minimized telemetry, loopback dashboard access,
+  hardened containers, pinned monthly updates, Git-reviewed policies, full
+  negative testing, staged rollout, and one-command rollback.
+
+Implementation should proceed in evaluate-only mode first. Selecting these
+defaults does not authorize switching live agents to enforce mode without a
+separate smoke test and rollout review.
 
 ## Questions
 
